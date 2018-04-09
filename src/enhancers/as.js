@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import React from "react";
 import styled from "styled-components";
 import omit from "lodash/omit";
@@ -7,7 +8,6 @@ import isSVGElement from "../utils/isSVGElement";
 import parseTag from "../utils/parseTag";
 import parseClassName from "../utils/parseClassName";
 
-// eslint-disable-next-line no-use-before-define
 const As = ({ nextAs, ...props }) => render({ ...props, as: nextAs });
 
 const render = ({ as: t, ...props }) => {
@@ -39,8 +39,10 @@ const render = ({ as: t, ...props }) => {
       className
     };
 
+    if (props.forwardedRef) console.log(props.forwardedRef);
+
     return (
-      <T {...allProps} ref={props.elementRef}>
+      <T {...allProps} ref={props.forwardedRef}>
         {children}
       </T>
     );
@@ -75,8 +77,13 @@ const as = asComponents => WrappedComponent => {
   Object.defineProperty(Reas, "extend", {
     value: (...args) => styled(Reas)(...args)
   });
+  console.log(
+    React.forwardRef((props, ref) => <Reas {...props} forwardedRef={ref} />)
+  );
 
-  return Reas;
+  return React.forwardRef((props, ref) => (
+    <Reas {...props} forwardedRef={ref} />
+  ));
 };
 
 export default as;

@@ -1,3 +1,27 @@
+### Oi
+Oi
+```jsx
+const { Input } = require("reas");
+
+class Example extends React.Component {
+  constructor(props) {
+    super(props)
+    this.element = React.createRef();
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    console.log(this.element);
+  }
+
+  render() {
+    return <Input ref={this.element} onChange={this.handleChange} />
+  }
+};
+
+<Example />
+```
+
 ### One component is one element
 There are no encapsulated nested components. No need to pass `nestedComponentProps`. You have direct access to any component that can be part of another one, such as `Popover.Arrow`.
 ```jsx { "showCode": true, "size": "80px" }

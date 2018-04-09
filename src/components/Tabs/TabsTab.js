@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import flow from "lodash/flow";
 import styled from "styled-components";
 import as from "../../enhancers/as";
-import createElementRef from "../../utils/createElementRef";
 import Step from "../Step";
 
 class Component extends React.Component {
@@ -63,7 +62,6 @@ class Component extends React.Component {
         onFocus={flow(this.show, onFocus)}
         onKeyDown={flow(this.keyDown, onKeyDown)}
         className={finalClassName}
-        elementRef={createElementRef(this, "element")}
       />
     );
   }
